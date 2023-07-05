@@ -10,6 +10,7 @@ isort = "*"
 black = "*"
 flake8 = "*"
 pyproject-flake8 = "*"
+pytz = "*"
 
 [dev-packages]
 
