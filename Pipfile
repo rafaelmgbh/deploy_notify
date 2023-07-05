@@ -11,6 +11,7 @@ black = "*"
 flake8 = "*"
 pyproject-flake8 = "*"
 pytz = "*"
+psutil = "*"
 
 [dev-packages]
 

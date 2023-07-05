@@ -24,8 +24,10 @@ dia_semana_local = data_hora_local.strftime("%A").capitalize()
 data_hora_formatada_local = data_hora_local.strftime("%d de %B de %Y %H:%M:%S")
 data_hora_formatada_utc = data_hora_utc.strftime("%d de %B de %Y %H:%M:%S")
 
-mensagem = (f"Horário local (Brasil):  **{data_hora_formatada_local}"+
-f"**\n\n Horário do servidor (UTC):  **{data_hora_formatada_utc}")
+mensagem = (
+    f"Horário local (Brasil):  **{data_hora_formatada_local}"
+    + f"**\n\n Horário do servidor (UTC):  **{data_hora_formatada_utc}"
+)
 
 
 @bot.event
