@@ -21,3 +21,4 @@ class Config(metaclass=SingletonMeta):
     load_dotenv()
     TOKEN = getenv("TOKEN")
     CHANNEL_ID = getenv("CHANNEL_ID")
+    ROLE_NAME = getenv("ROLE_NAME")
