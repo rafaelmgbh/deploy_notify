@@ -1,5 +1,7 @@
 import requests
 
+from config import Config
+
 
 def get_branch_info(repo, branch_name):
     url = (
@@ -7,7 +9,7 @@ def get_branch_info(repo, branch_name):
     )
     headers = {
         "Accept": "application/vnd.github.v3+json",
-        "Authorization": "Bearer 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",
+        "Authorization": Config.GIT_HUB_TOKEN,
     }
     response = requests.get(url, headers=headers)
 
@@ -16,7 +18,7 @@ def get_branch_info(repo, branch_name):
         author = branch_data["commit"]["author"]["login"]
         return get_real_name(author)
     else:
-        return None, None
+        return "Não foi possível obter o nome do autor"
 
 
 def get_real_name(name):
@@ -29,4 +31,4 @@ def get_real_name(name):
     elif name == "PauloFMartins485":
         return "Paulo Martins"
     else:
-        return "Não foi possível obter o nome do autor"
+        return "Autor não cadastrado"
