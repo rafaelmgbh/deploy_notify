@@ -52,8 +52,7 @@ async def on_ready():
             f"** ##############    Deploy    ############## **"
             f"\n\n **Ambiente :** {environment} \n "
             f"**Aplicação :**  {stack} \n **Branch :**  {branch}"
-            f"\n\n **{mensagem}**"
-            "\n\n ** "
+            f"\n\n **{mensagem}**"          
             f"\n\n {mention_string}"
         )
     else:
