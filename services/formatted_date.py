@@ -16,7 +16,7 @@ class FormattedDate:
             "%d de %B de %Y %H:%M:%S"
         )
         mensagem = (
-            f"Horário local (Brasil):  **{data_hora_formatada_local}"
-            + f"**\n\n Horário do servidor (UTC):  **{data_hora_formatada_utc}"
+            f"Horário local (Brasil): {data_hora_formatada_local}"
+            + f"\n\n Horário do servidor (UTC): {data_hora_formatada_utc}"
         )
         return mensagem

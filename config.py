@@ -22,3 +22,5 @@ class Config(metaclass=SingletonMeta):
     TOKEN = getenv("TOKEN")
     CHANNEL_ID = getenv("CHANNEL_ID")
     ROLE_NAME = getenv("ROLE_NAME")
+    ENVIRONMENT = getenv("ENVIRONMENT")
+    INTERVAL_MINUTES = getenv("INTERVAL_MINUTES")
