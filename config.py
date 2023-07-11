@@ -25,3 +25,5 @@ class Config(metaclass=SingletonMeta):
     ENVIRONMENT = getenv("ENVIRONMENT")
     INTERVAL_MINUTES = getenv("INTERVAL_MINUTES")
     GIT_HUB_TOKEN = getenv("GIT_HUB_TOKEN")
+    USER_ID = getenv("USER_ID")
+

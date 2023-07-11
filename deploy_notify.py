@@ -8,11 +8,13 @@ from dotenv import load_dotenv
 from config import Config
 from services.formatted_date import FormattedDate
 from services.github import get_branch_info
+from utils.enumEnvironment import enumEnvironment
 
 load_dotenv()
 
 CHANNEL_ID = Config.CHANNEL_ID
 ROLE_NAME = Config.ROLE_NAME
+USER_ID = Config.USER_ID
 
 
 intents = discord.Intents(members=True, guilds=True)
@@ -34,7 +36,7 @@ async def on_ready():
         await bot.close()
         return
 
-    environment = sys.argv[1]
+    environment = Config.ENVIRONMENT
     stack = sys.argv[2]
     branch = sys.argv[3]
 
@@ -52,22 +54,40 @@ async def on_ready():
     elif stack == "React":
         repo = "motbot"
 
-    get_branch_info(repo, branch)
+    user = None
+    if environment == enumEnvironment.Production.value:
+        user = await bot.fetch_user(USER_ID)
 
     if role is not None:
         mention_string = role.mention
         mensagem = FormattedDate.get_formatted_datetime()
+        info = get_branch_info(repo, branch)
 
-        await channel.send(
-            f"** ##############    Deploy    ############## **"
-            f"\n\n**Ambiente :** {environment} \n "
-            f"\n\n**Autor :** {get_branch_info(repo, branch)} \n"
-            f"**Aplicação :**  {stack} \n**Branch :**  {branch}\n\n"
-            f"**{mensagem}**"
-            f"\n\n{mention_string}"
-        )
+        if user is not None:
+            message_content = (
+                f"** ##############    Deploy    ############## **"
+                f"\n\n**Ambiente :** {environment} \n "
+                f"**Autor :** {info['author']}\n"
+                f"**Descrição**: \n\n {info['description']} \n\n"
+                f"**Aplicação :**  {stack} \n**Branch :**  {branch}\n\n"
+                f"**{mensagem}**"
+                f"\n\n{mention_string} {user.mention}"
+            )
+            await channel.send(message_content)
+        else:
+            message_content = (
+                f"** ##############    Deploy    ############## **"
+                f"\n\n**Ambiente :** {environment} \n "
+                f"**Autor :** {info['author']}\n"
+                f"**Descrição**: \n\n {info['description']} \n\n"
+                f"**Aplicação :**  {stack} \n**Branch :**  {branch}\n\n"
+                f"**{mensagem}**"
+                f"\n\n{mention_string}"
+            )
 
-    await bot.close()
+            await channel.send(message_content)
+
+        await bot.close()
 
 
 bot.run(Config.TOKEN)
